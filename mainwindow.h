@@ -31,7 +31,16 @@ private slots:
     void on_startButton_clicked();
     void on_stopButton_clicked();
     void on_refreshButton_clicked();
+
+    void on_updateButton_1_clicked();
+    void on_updateButton_2_clicked();
+    void on_updateButton_3_clicked();
+    void on_updateButton_4_clicked();
+    void on_updateButton_5_clicked();
+
     void on_clearButton_clicked();
+
+    void resetButtonsColors();
 
 
     /* Odczyt i parsowanie danych */
@@ -41,6 +50,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    /* odczyt parametrów z pliku parameters.csv*/
+    void ReadSettings();
+
+    /* zapis parametrów do pliku parameters.csv*/
+    void SaveSettings();
 
     /* poszukuje urządzeń */
     void searchDevices();
@@ -72,6 +87,7 @@ private:
 
     int status;                                 // status - run 1 lub stop 0
 
+    int preset;
 
     /* Vektory na potrzeby rysowania */
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1440</width>
-    <height>569</height>
+    <width>1251</width>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,21 +23,9 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0" columnstretch="4,0,0">
-    <item row="1" column="2" rowspan="5">
-     <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0">
-      <item>
-       <widget class="QGroupBox" name="groupBox_6">
-        <property name="title">
-         <string>Device</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QComboBox" name="port"/>
-         </item>
-        </layout>
-       </widget>
-      </item>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0">
       <item>
        <widget class="QGroupBox" name="groupBox">
         <property name="sizePolicy">
@@ -48,7 +36,7 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>350</width>
+          <width>400</width>
           <height>0</height>
          </size>
         </property>
@@ -56,6 +44,18 @@
          <string>Wyjście:</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QGroupBox" name="groupBox_6">
+           <property name="title">
+            <string>Device</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QComboBox" name="port"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
          <item>
           <widget class="QPlainTextEdit" name="output">
            <property name="sizePolicy">
@@ -73,7 +73,7 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
             <widget class="QLineEdit" name="commandLine">
              <property name="text">
@@ -101,207 +101,457 @@
       </item>
      </layout>
     </item>
-    <item row="1" column="0" colspan="2">
-     <layout class="QVBoxLayout" name="verticalLayout_6">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,10">
       <item>
-       <layout class="QGridLayout" name="gridLayout_6" columnstretch="1,0,0,0,0,0">
-        <item row="0" column="3">
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="title">
-           <string>Timing</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Controller period</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>[ms]</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="form_SP2">
-             <property name="text">
-              <string>300</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Delay</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>[ms]</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="form_CP">
-             <property name="text">
-              <string>300</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>[ms]</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Sensor period</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="form_Delay">
-             <property name="text">
-              <string>300</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>KP up</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>KP down</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>KI up</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>KI down</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Control. period</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Sensor period</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Delay</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Accuracy</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_19">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Max output</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Setpoint</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_1">
+            <item>
+             <widget class="QLineEdit" name="form_KPup_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KPdown_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIup_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIdown_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_CP_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_SP_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Delay_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Acc_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_MO_1"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Setpoint_1"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="updateButton_1">
+              <property name="text">
+               <string>Update</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLineEdit" name="form_KPup_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KPdown_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIup_2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIdown_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_CP_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_SP_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Delay_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Acc_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_MO_2"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Setpoint_2"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="updateButton_2">
+              <property name="text">
+               <string>Update</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLineEdit" name="form_KPup_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KPdown_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIup_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIdown_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_CP_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_SP_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Delay_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Acc_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_MO_3"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Setpoint_3"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="updateButton_3">
+              <property name="text">
+               <string>Update</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLineEdit" name="form_KPup_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KPdown_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIup_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIdown_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_CP_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_SP_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Delay_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Acc_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_MO_4"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Setpoint_4"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="updateButton_4">
+              <property name="text">
+               <string>Update</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLineEdit" name="form_KPup_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KPdown_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIup_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_KIdown_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_CP_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_SP_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Delay_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Acc_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_MO_5"/>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="form_Setpoint_5"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="updateButton_5">
+              <property name="text">
+               <string>Update</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </item>
-        <item row="0" column="4">
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="title">
-           <string>Other</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_12">
-             <property name="text">
-              <string>Accuracy</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="form_AC">
-             <property name="text">
-              <string>300</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>Max output</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="form_MO">
-             <property name="text">
-              <string>300</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="QGroupBox" name="groupBox_5">
-          <property name="title">
-           <string>Setpoint</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <item>
-            <widget class="QLineEdit" name="form_SP">
-             <property name="text">
-              <string>300</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_9"/>
-        </item>
-        <item row="0" column="2">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="title">
-           <string>Parameters</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>KP</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>down</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>KI</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLineEdit" name="form_kPdown">
-             <property name="text">
-              <string>1.33</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>up</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="form_kIup">
-             <property name="text">
-              <string>15.2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="form_kPup">
-             <property name="text">
-              <string>30.0</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QLineEdit" name="form_kIdown">
-             <property name="text">
-              <string>3.23</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>10</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="startButton">
+            <property name="text">
+             <string>START</string>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="stopButton">
+            <property name="text">
+             <string>STOP</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="clearButton">
+            <property name="text">
+             <string>CLEAR</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0,0,0,0,0,0,0">
+       <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,0,0,0,0">
         <item>
          <widget class="QLabel" name="label_18">
           <property name="text">
@@ -538,42 +788,14 @@
           </property>
          </spacer>
         </item>
-        <item>
-         <widget class="QPushButton" name="startButton">
-          <property name="text">
-           <string>START</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="stopButton">
-          <property name="text">
-           <string>STOP</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="clearButton">
-          <property name="text">
-           <string>Clear</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="refreshButton">
-          <property name="text">
-           <string>Update Data</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
-     </layout>
-    </item>
-    <item row="2" column="0" rowspan="4" colspan="2">
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QCustomPlot" name="customPlot" native="true"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QCustomPlot" name="customPlot" native="true"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -585,7 +807,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1440</width>
+     <width>1251</width>
      <height>21</height>
     </rect>
    </property>

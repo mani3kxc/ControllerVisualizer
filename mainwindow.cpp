@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QScrollBar>
 #include <QMessageBox>
+#include <QFile>
+#include <QDebug>
 
 
 // funkcje
@@ -15,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     searchDevices();            // Szukamy urządzeń
 
+    ReadSettings();
 
     initPlot();                 // Inicjalizacja wykresu
 
@@ -28,9 +31,177 @@ MainWindow::~MainWindow()
     if(port.isOpen())
         port.close();
 
+    SaveSettings();
+
     delete ui;
 }
+/* Odczyt pól z pliku CSV i ustawienie ich w programie */
+void MainWindow::ReadSettings()
+{
 
+    QStringList fieldNames;
+    QStringList defaultValues;
+
+    fieldNames << "form_KPup_" << "form_KPdown_" << "form_KIup_" << "form_KIdown_" << "form_CP_" << "form_SP_" << "form_Delay_" << "form_Acc_" << "form_MO_" << "form_Setpoint_";
+    defaultValues << "1" << "2" << "3" << "4" << "5" << "6" << "7" << "8" << "9" << "10";
+    int j=1;
+
+     QFile file(QCoreApplication::applicationDirPath() +"/parameters.csv");
+         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+         {
+             qDebug() << QCoreApplication::applicationDirPath() << file.errorString();
+                     QMessageBox::warning(this, "Uwaga", " Nie znaleziono pliku CSV wypełniającego ustawień.\n Pozostaną one puste!");
+
+                     while(j<=5)
+                     {
+                     for(int i = 0; i<fieldNames.length(); i++)
+                     {
+
+                         qDebug() << QString(fieldNames[i]) + QString::number(j) + "----> 0" + QString::number(i);
+
+                         QLineEdit *field =  ui->centralWidget->findChild<QLineEdit *>(QString(fieldNames[i]) + QString::number(j));
+
+                         field->setText( defaultValues[i] );
+
+                     }
+                     j++;
+                     }
+
+             return;
+         }
+
+
+        if(file.size()==0)
+        {
+
+            qDebug() << "SIZE ZERO";
+
+            while(j<=5)
+            {
+            for(int i = 0; i<fieldNames.length(); i++)
+            {
+
+                qDebug() << QString(fieldNames[i]) + QString::number(j) + "----> 0" + QString::number(i);
+
+                QLineEdit *field =  ui->centralWidget->findChild<QLineEdit *>(QString(fieldNames[i]) + QString::number(j));
+
+                field->setText( defaultValues[i] );
+
+            }
+            j++;
+            }
+
+            return;
+
+        }
+
+           qDebug() << "SIZE ZERO2?";
+
+         QTextStream in(&file);
+         while (!in.atEnd()) {
+
+             QString line = in.readLine();
+
+
+             if(j==1)
+                {
+                 j++;
+                 continue;
+                }
+
+             QStringList wordList;
+             wordList = line.split(";");
+
+             for(int i = 0; i< wordList.length(); i++)
+             {
+
+                 qDebug() << QString(fieldNames[i]) + QString::number(j-1) + "---->" + wordList[i];
+
+                 QLineEdit *field =  ui->centralWidget->findChild<QLineEdit *>(QString(fieldNames[i]) + QString::number(j-1));
+
+                 if(wordList[i]!="")
+                    field->setText( wordList[i] );
+                 else
+                    field->setText("0");
+             }
+             j++;
+             if(j==7)
+                 break;
+         }
+
+
+
+
+
+         if(j<7)
+         {
+             while(j<=6)
+             {
+             for(int i = 0; i<fieldNames.length(); i++)
+             {
+
+                 qDebug() << QString(fieldNames[i]) + QString::number(j-1) + "----> 0" + QString::number(i);
+
+                 QLineEdit *field =  ui->centralWidget->findChild<QLineEdit *>(QString(fieldNames[i]) + QString::number(j-1));
+
+                 field->setText( defaultValues[i] );
+
+             }
+             j++;
+             }
+         }
+
+         file.close();
+
+         preset = 1;
+
+}
+
+void MainWindow::SaveSettings()
+{
+    QFile file(QCoreApplication::applicationDirPath() +"/parameters.csv");
+        if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text))
+        {
+            qDebug() << QCoreApplication::applicationDirPath() << file.errorString();
+                    QMessageBox::warning(this, "Uwaga", "Błąd zapisu do pliku CSV. Ustawienia pól nie zostały zachowane");
+            return;}
+
+            QTextStream stream(&file);
+
+         QStringList fieldNames;
+
+         fieldNames << "form_KPup_" << "form_KPdown_" << "form_KIup_" << "form_KIdown_" << "form_CP_" << "form_SP_" << "form_Delay_" << "form_Acc_" << "form_MO_" << "form_Setpoint_";
+
+         QString line;
+
+         stream << "KPup;KPdown;KIup;KIdown;CP;SP;Delay;Acc;MO;Setpoint" << endl;
+
+
+         for(int j=1; j<6; j++)
+         {
+
+             line = "";
+
+             for(int i = 0; i< fieldNames.length(); i++)
+             {
+
+                 QLineEdit *field =  ui->centralWidget->findChild<QLineEdit *>(QString(fieldNames[i]) + QString::number(j));
+
+                 line += field->text() + ";";
+
+             }
+
+           stream << line.left(line.length() - 1) << endl;
+
+        }
+
+
+
+file.close();
+
+
+
+}
 
 /* aktualizacja listy urządzen */
 void MainWindow::searchDevices()
@@ -59,7 +230,7 @@ void MainWindow::searchDevices()
 void MainWindow::on_port_currentIndexChanged(int index)
 {
 
-    on_clearButton_clicked();
+
 
     if(port.isOpen()) port.close();
     QString txt = "Wybierz Urządzenie";
@@ -77,14 +248,23 @@ void MainWindow::on_port_currentIndexChanged(int index)
         port.setBaudRate(115200);
         port.setDataTerminalReady(true);
 
-        read = 1; //Można czytać
-        on_refreshButton_clicked();
+
+
+
+        QTime dieTime= QTime::currentTime().addSecs(2);
+            while (QTime::currentTime() < dieTime)
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+         read = 1; //Można czytać
+         on_clearButton_clicked();
+         on_updateButton_1_clicked();
 
     }
     else
         info = NULL;
 
     ui->statusBar->showMessage("Wybrano urządzenie: " + txt,2000);
+
 
 }
 
@@ -164,7 +344,7 @@ void MainWindow::on_clearButton_clicked()
 /* Obsługa przycisku Refresh */
 void MainWindow::on_refreshButton_clicked()
 {
-    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+    /*QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
 
     sp = "sp" + ui->form_SP->text() + ";"; //Setpoint
     kPd = "kPd" + ui->form_kPdown->text() + ";";
@@ -195,7 +375,209 @@ void MainWindow::on_refreshButton_clicked()
 
     status=1;
 
+    ui->commandLine->clear();*/
+}
+
+void MainWindow::on_updateButton_1_clicked()
+{
+    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+
+    sp = "sp" + ui->form_Setpoint_1->text() + ";"; //Setpoint
+    kPd = "kPd" + ui->form_KPdown_1->text() + ";";
+    kPu = "kPu" + ui->form_KPup_1->text() + ";";
+    kId = "kId" + ui->form_KIdown_1->text() + ";";
+    kIu = "kIu" + ui->form_KIup_1->text() + ";";
+    acc = "acc" + ui->form_Acc_1->text() + ";";
+    cp = "cp" + ui->form_CP_1->text() + ";";
+    se = "se" + ui->form_SP_1->text() + ";"; //Błąd! //Sensor Period
+    max = "max" + ui->form_MO_1->text() + ";";
+    delay = "delay" + ui->form_Delay_1->text() + ";";
+
+    set_y_max = ui->form_MO_1->text().toInt();
+
+    send(sp);
+    send(kPd);
+    send(kPu);
+    send(kId);
+    send(kIu);
+    send(acc);
+    send(cp);
+    send(se);
+    send(max);
+    send(delay);
+
+    status=1;
+
     ui->commandLine->clear();
+
+    resetButtonsColors();
+    ui->updateButton_1->setStyleSheet("* { background-color: rgb(0,195,000) }");
+
+    preset = 1;
+
+}
+
+void MainWindow::on_updateButton_2_clicked()
+{
+    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+
+    sp = "sp" + ui->form_Setpoint_2->text() + ";"; //Setpoint
+    kPd = "kPd" + ui->form_KPdown_2->text() + ";";
+    kPu = "kPu" + ui->form_KPup_2->text() + ";";
+    kId = "kId" + ui->form_KIdown_2->text() + ";";
+    kIu = "kIu" + ui->form_KIup_2->text() + ";";
+    acc = "acc" + ui->form_Acc_2->text() + ";";
+    cp = "cp" + ui->form_CP_2->text() + ";";
+    se = "se" + ui->form_SP_2->text() + ";"; //Błąd! //Sensor Period
+    max = "max" + ui->form_MO_2->text() + ";";
+    delay = "delay" + ui->form_Delay_2->text() + ";";
+
+    set_y_max = ui->form_MO_2->text().toInt();
+
+    send(sp);
+    send(kPd);
+    send(kPu);
+    send(kId);
+    send(kIu);
+    send(acc);
+    send(cp);
+    send(se);
+    send(max);
+    send(delay);
+
+    status=1;
+
+    ui->commandLine->clear();
+
+    resetButtonsColors();
+    ui->updateButton_2->setStyleSheet("* { background-color: rgb(0,195,000) }");
+
+    preset = 2;
+}
+
+void MainWindow::on_updateButton_3_clicked()
+{
+    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+
+    sp = "sp" + ui->form_Setpoint_3->text() + ";"; //Setpoint
+    kPd = "kPd" + ui->form_KPdown_3->text() + ";";
+    kPu = "kPu" + ui->form_KPup_3->text() + ";";
+    kId = "kId" + ui->form_KIdown_3->text() + ";";
+    kIu = "kIu" + ui->form_KIup_3->text() + ";";
+    acc = "acc" + ui->form_Acc_3->text() + ";";
+    cp = "cp" + ui->form_CP_3->text() + ";";
+    se = "se" + ui->form_SP_3->text() + ";"; //Błąd! //Sensor Period
+    max = "max" + ui->form_MO_3->text() + ";";
+    delay = "delay" + ui->form_Delay_3->text() + ";";
+
+    set_y_max = ui->form_MO_3->text().toInt();
+
+    send(sp);
+    send(kPd);
+    send(kPu);
+    send(kId);
+    send(kIu);
+    send(acc);
+    send(cp);
+    send(se);
+    send(max);
+    send(delay);
+
+    status=1;
+
+    ui->commandLine->clear();
+
+    resetButtonsColors();
+    ui->updateButton_3->setStyleSheet("* { background-color: rgb(0,195,000) }");
+
+    preset = 3;
+}
+
+void MainWindow::on_updateButton_4_clicked()
+{
+    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+
+    sp = "sp" + ui->form_Setpoint_4->text() + ";"; //Setpoint
+    kPd = "kPd" + ui->form_KPdown_4->text() + ";";
+    kPu = "kPu" + ui->form_KPup_4->text() + ";";
+    kId = "kId" + ui->form_KIdown_4->text() + ";";
+    kIu = "kIu" + ui->form_KIup_4->text() + ";";
+    acc = "acc" + ui->form_Acc_4->text() + ";";
+    cp = "cp" + ui->form_CP_4->text() + ";";
+    se = "se" + ui->form_SP_4->text() + ";"; //Błąd! //Sensor Period
+    max = "max" + ui->form_MO_4->text() + ";";
+    delay = "delay" + ui->form_Delay_4->text() + ";";
+
+    set_y_max = ui->form_MO_4->text().toInt();
+
+    send(sp);
+    send(kPd);
+    send(kPu);
+    send(kId);
+    send(kIu);
+    send(acc);
+    send(cp);
+    send(se);
+    send(max);
+    send(delay);
+
+    status=1;
+
+    ui->commandLine->clear();
+
+    resetButtonsColors();
+    ui->updateButton_4->setStyleSheet("* { background-color: rgb(0,195,000) }");
+
+    preset = 4;
+}
+
+void MainWindow::on_updateButton_5_clicked()
+{
+    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+
+    sp = "sp" + ui->form_Setpoint_5->text() + ";"; //Setpoint
+    kPd = "kPd" + ui->form_KPdown_5->text() + ";";
+    kPu = "kPu" + ui->form_KPup_5->text() + ";";
+    kId = "kId" + ui->form_KIdown_5->text() + ";";
+    kIu = "kIu" + ui->form_KIup_5->text() + ";";
+    acc = "acc" + ui->form_Acc_5->text() + ";";
+    cp = "cp" + ui->form_CP_5->text() + ";";
+    se = "se" + ui->form_SP_5->text() + ";"; //Błąd! //Sensor Period
+    max = "max" + ui->form_MO_5->text() + ";";
+    delay = "delay" + ui->form_Delay_5->text() + ";";
+
+    set_y_max = ui->form_MO_5->text().toInt();
+
+    send(sp);
+    send(kPd);
+    send(kPu);
+    send(kId);
+    send(kIu);
+    send(acc);
+    send(cp);
+    send(se);
+    send(max);
+    send(delay);
+
+    status=1;
+
+    ui->commandLine->clear();
+
+    resetButtonsColors();
+    ui->updateButton_5->setStyleSheet("* { background-color: rgb(0,195,000) }");
+
+    preset = 5;
+
+}
+
+void MainWindow::resetButtonsColors() {
+
+    ui->updateButton_1->setStyleSheet("");
+    ui->updateButton_2->setStyleSheet("");
+    ui->updateButton_3->setStyleSheet("");
+    ui->updateButton_4->setStyleSheet("");
+    ui->updateButton_5->setStyleSheet("");
+
 }
 
 
@@ -337,9 +719,9 @@ void MainWindow::initPlot()
     ui->customPlot->addGraph();
     ui->customPlot->graph(0)->setPen(setpointPen);
     ui->customPlot->addGraph();
-    ui->customPlot->graph(1)->setPen(errorPen);
+    ui->customPlot->graph(1)->setPen(feedbackPen);
     ui->customPlot->addGraph();
-    ui->customPlot->graph(2)->setPen(feedbackPen);
+    ui->customPlot->graph(2)->setPen(errorPen);
     ui->customPlot->addGraph();
     ui->customPlot->graph(3)->setPen(integralPen);
     ui->customPlot->addGraph();
