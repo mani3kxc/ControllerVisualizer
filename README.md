@@ -1,2 +1,3 @@
-"# ControllerVisualizer"  git init git add README.md git commit -m "first commit" git remote add origin https://github.com/mani3kxc/ControllerVisualizer.git git push -u origin master
-"# ControllerVisualizer" 
+Controller Visualizer
+
+Wizualizacja danych przesylanych z Arduino.
