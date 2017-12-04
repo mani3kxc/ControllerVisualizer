@@ -30,7 +30,10 @@ private slots:
     void on_enterButton_clicked();
     void on_startButton_clicked();
     void on_stopButton_clicked();
-    void on_refreshButton_clicked();
+    void on_copydown12Button_clicked();
+    void on_copydown23Button_clicked();
+    void on_copydown34Button_clicked();
+    void on_copydown45Button_clicked();
 
     void on_updateButton_1_clicked();
     void on_updateButton_2_clicked();
@@ -42,6 +45,7 @@ private slots:
 
     void resetButtonsColors();
 
+void updatePlot();
 
     /* Odczyt i parsowanie danych */
     void readData();
@@ -68,7 +72,7 @@ private:
 
     /* Inicjalizacjai odświeżenie widgeta odpowiedzialnego za wykresy */
     void initPlot();
-    void updatePlot();
+
 
 
 

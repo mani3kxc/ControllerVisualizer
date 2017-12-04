@@ -102,9 +102,81 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,10">
+     <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,10,0">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>30</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copydown12Button">
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>[</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copydown23Button">
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>[</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copydown34Button">
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>[</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copydown45Button">
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>[</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -551,11 +623,28 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,0,0,0,0">
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QCustomPlot" name="customPlot" native="true"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,0,0,0,0,0,0,0,0,0">
         <item>
          <widget class="QLabel" name="label_18">
           <property name="text">
            <string>Legenda:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="SPcheckBox">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -613,6 +702,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="ERRcheckBox">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_16">
           <property name="palette">
            <palette>
@@ -659,6 +758,16 @@
           </property>
           <property name="text">
            <string>Err</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="FBcheckBox">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -713,6 +822,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="INTcheckBox">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_14">
           <property name="palette">
            <palette>
@@ -763,6 +882,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="OUTcheckBox">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label">
           <property name="font">
            <font>
@@ -787,13 +916,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_12">
-        <item>
-         <widget class="QCustomPlot" name="customPlot" native="true"/>
         </item>
        </layout>
       </item>

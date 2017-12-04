@@ -24,6 +24,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->action_refreshPorts,SIGNAL(triggered()),this,SLOT(refresh())); //Trigger - akcja po wybraniu opcji odświeżenia urządzeń
     connect(&port, SIGNAL(readyRead()), this, SLOT(readData())); //Trigger - czytamy dane gdy tylko będzie gotowość do odczytu
 
+
+    // Odswiezenie wykresu
+    connect(ui->SPcheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePlot()));
+    connect(ui->ERRcheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePlot()));
+    connect(ui->FBcheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePlot()));
+    connect(ui->INTcheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePlot()));
+    connect(ui->OUTcheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePlot()));
+
 }
 
 MainWindow::~MainWindow()
@@ -341,41 +349,61 @@ void MainWindow::on_clearButton_clicked()
     ui->commandLine->clear();
 }
 
-/* Obsługa przycisku Refresh */
-void MainWindow::on_refreshButton_clicked()
+/* Kopiowanie zawartosci pól w dół */
+void MainWindow::on_copydown12Button_clicked()
 {
-    /*QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
+   ui->form_Setpoint_2->setText(ui->form_Setpoint_1->text());
+   ui->form_KPdown_2->setText(ui->form_KPdown_1->text());
+   ui->form_KPup_2->setText( ui->form_KPup_1->text());
+   ui->form_KIdown_2->setText(ui->form_KIdown_1->text());
+   ui->form_KIup_2->setText( ui->form_KIup_1->text());
+   ui->form_Acc_2->setText(ui->form_Acc_1->text());
+   ui->form_CP_2->setText( ui->form_CP_1->text());
+   ui->form_SP_2->setText( ui->form_SP_1->text());
+   ui->form_MO_2->setText( ui->form_MO_1->text());
+   ui->form_Delay_2->setText(ui->form_Delay_1->text());
+}
 
-    sp = "sp" + ui->form_SP->text() + ";"; //Setpoint
-    kPd = "kPd" + ui->form_kPdown->text() + ";";
-    kPu = "kPu" + ui->form_kPup->text() + ";";
-    kId = "kId" + ui->form_kIdown->text() + ";";
-    kIu = "kIu" + ui->form_kIup->text() + ";";
-    acc = "acc" + ui->form_AC->text() + ";";
-    cp = "cp" + ui->form_CP->text() + ";";
-    se = "se" + ui->form_SP2->text() + ";"; //Błąd! //Sensor Period
-    max = "max" + ui->form_MO->text() + ";";
-    delay = "delay" + ui->form_Delay->text() + ";";
+void MainWindow::on_copydown23Button_clicked()
+{
+   ui->form_Setpoint_3->setText(ui->form_Setpoint_2->text());
+   ui->form_KPdown_3->setText(ui->form_KPdown_2->text());
+   ui->form_KPup_3->setText( ui->form_KPup_2->text());
+   ui->form_KIdown_3->setText(ui->form_KIdown_2->text());
+   ui->form_KIup_3->setText( ui->form_KIup_2->text());
+   ui->form_Acc_3->setText(ui->form_Acc_2->text());
+   ui->form_CP_3->setText( ui->form_CP_2->text());
+   ui->form_SP_3->setText( ui->form_SP_2->text());
+   ui->form_MO_3->setText( ui->form_MO_2->text());
+   ui->form_Delay_3->setText(ui->form_Delay_2->text());
+}
 
-    set_y_max = ui->form_MO->text().toInt();
+void MainWindow::on_copydown34Button_clicked()
+{
+   ui->form_Setpoint_4->setText(ui->form_Setpoint_3->text());
+   ui->form_KPdown_4->setText(ui->form_KPdown_3->text());
+   ui->form_KPup_4->setText( ui->form_KPup_3->text());
+   ui->form_KIdown_4->setText(ui->form_KIdown_3->text());
+   ui->form_KIup_4->setText( ui->form_KIup_3->text());
+   ui->form_Acc_4->setText(ui->form_Acc_3->text());
+   ui->form_CP_4->setText( ui->form_CP_3->text());
+   ui->form_SP_4->setText( ui->form_SP_3->text());
+   ui->form_MO_4->setText( ui->form_MO_3->text());
+   ui->form_Delay_4->setText(ui->form_Delay_3->text());
+}
 
-    send(sp);
-    send(kPd);
-    send(kPu);
-    send(kId);
-    send(kIu);
-    send(acc);
-    send(cp);
-    send(se);
-    send(max);
-    send(delay);
-
-    //send(sp+kPd+kPu+kId+kIu+acc+cp+se+max+delay+"start");
-
-
-    status=1;
-
-    ui->commandLine->clear();*/
+void MainWindow::on_copydown45Button_clicked()
+{
+   ui->form_Setpoint_5->setText(ui->form_Setpoint_4->text());
+   ui->form_KPdown_5->setText(ui->form_KPdown_4->text());
+   ui->form_KPup_5->setText( ui->form_KPup_4->text());
+   ui->form_KIdown_5->setText(ui->form_KIdown_4->text());
+   ui->form_KIup_5->setText( ui->form_KIup_4->text());
+   ui->form_Acc_5->setText(ui->form_Acc_4->text());
+   ui->form_CP_5->setText( ui->form_CP_4->text());
+   ui->form_SP_5->setText( ui->form_SP_4->text());
+   ui->form_MO_5->setText( ui->form_MO_4->text());
+   ui->form_Delay_5->setText(ui->form_Delay_4->text());
 }
 
 void MainWindow::on_updateButton_1_clicked()
@@ -737,6 +765,8 @@ void MainWindow::initPlot()
     connect(ui->customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->yAxis2, SLOT(setRange(QCPRange)));
 
+
+
     // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
     ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 
@@ -764,6 +794,31 @@ void MainWindow::updatePlot()
     ui->customPlot->graph( 2 )->setData( plot_X , plot_ERR );
     ui->customPlot->graph( 3 )->setData( plot_X , plot_I );
     ui->customPlot->graph( 4 )->setData( plot_X , plot_OUT );
+
+    if(ui->SPcheckBox->isChecked())
+        ui->customPlot->graph( 0 )->setVisible(true);
+    else
+        ui->customPlot->graph( 0 )->setVisible(false);
+
+    if(ui->FBcheckBox->isChecked())
+        ui->customPlot->graph( 1 )->setVisible(true);
+    else
+        ui->customPlot->graph( 1 )->setVisible(false);
+
+    if(ui->ERRcheckBox->isChecked())
+        ui->customPlot->graph( 2 )->setVisible(true);
+    else
+        ui->customPlot->graph( 2 )->setVisible(false);
+
+    if(ui->INTcheckBox->isChecked())
+        ui->customPlot->graph( 3 )->setVisible(true);
+    else
+        ui->customPlot->graph( 3 )->setVisible(false);
+
+    if(ui->OUTcheckBox->isChecked())
+        ui->customPlot->graph( 4 )->setVisible(true);
+    else
+        ui->customPlot->graph( 4 )->setVisible(false);
 
 
     QVector<double>::iterator xMax = std::max_element( plot_X.begin() , plot_X.end() );
