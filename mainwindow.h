@@ -30,6 +30,7 @@ private slots:
     void on_enterButton_clicked();
     void on_startButton_clicked();
     void on_stopButton_clicked();
+
     void on_copydown12Button_clicked();
     void on_copydown23Button_clicked();
     void on_copydown34Button_clicked();
@@ -43,13 +44,14 @@ private slots:
 
     void on_clearButton_clicked();
 
+    /* wyczyszczenie kolorów */
     void resetButtonsColors();
 
-void updatePlot();
+    /* odświeżenie wykresu */
+    void updatePlot();
 
     /* Odczyt i parsowanie danych */
     void readData();
-
 
 
 private:
@@ -73,15 +75,14 @@ private:
     /* Inicjalizacjai odświeżenie widgeta odpowiedzialnego za wykresy */
     void initPlot();
 
-
-
+    /* Przekopiowanie danych formuarzy między kolumnami */
+    void copyFromTo(QString from, QString to);
 
 
     QList <QSerialPortInfo> available_port;     // lista dostępnych portów
     const QSerialPortInfo *info;                // wybrany port
 
     QSerialPort port;                           // otwarty port
-
 
 
     int plotindex;                              // Index na potrzeby plot X

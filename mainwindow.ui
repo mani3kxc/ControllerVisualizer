@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1251</width>
-    <height>585</height>
+    <width>1249</width>
+    <height>578</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -246,22 +246,6 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_6">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Control. period</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QLabel" name="label_7">
               <property name="font">
                <font>
@@ -303,22 +287,6 @@
               </property>
               <property name="text">
                <string>Accuracy</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_19">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Max output</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -374,9 +342,6 @@
              <widget class="QLineEdit" name="form_KIdown_1"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="form_CP_1"/>
-            </item>
-            <item>
              <widget class="QLineEdit" name="form_SP_1"/>
             </item>
             <item>
@@ -386,15 +351,55 @@
              <widget class="QLineEdit" name="form_Acc_1"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="form_MO_1"/>
-            </item>
-            <item>
              <widget class="QLineEdit" name="form_Setpoint_1"/>
             </item>
             <item>
              <widget class="QPushButton" name="updateButton_1">
+              <property name="palette">
+               <palette>
+                <active>
+                 <colorrole role="Button">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>240</red>
+                    <green>51</green>
+                    <blue>118</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </active>
+                <inactive>
+                 <colorrole role="Button">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>240</red>
+                    <green>51</green>
+                    <blue>118</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </inactive>
+                <disabled>
+                 <colorrole role="Button">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>240</red>
+                    <green>51</green>
+                    <blue>118</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </disabled>
+               </palette>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Update</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -419,9 +424,6 @@
              <widget class="QLineEdit" name="form_KIdown_2"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="form_CP_2"/>
-            </item>
-            <item>
              <widget class="QLineEdit" name="form_SP_2"/>
             </item>
             <item>
@@ -429,9 +431,6 @@
             </item>
             <item>
              <widget class="QLineEdit" name="form_Acc_2"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="form_MO_2"/>
             </item>
             <item>
              <widget class="QLineEdit" name="form_Setpoint_2"/>
@@ -460,9 +459,6 @@
              <widget class="QLineEdit" name="form_KIdown_3"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="form_CP_3"/>
-            </item>
-            <item>
              <widget class="QLineEdit" name="form_SP_3"/>
             </item>
             <item>
@@ -470,9 +466,6 @@
             </item>
             <item>
              <widget class="QLineEdit" name="form_Acc_3"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="form_MO_3"/>
             </item>
             <item>
              <widget class="QLineEdit" name="form_Setpoint_3"/>
@@ -501,9 +494,6 @@
              <widget class="QLineEdit" name="form_KIdown_4"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="form_CP_4"/>
-            </item>
-            <item>
              <widget class="QLineEdit" name="form_SP_4"/>
             </item>
             <item>
@@ -511,9 +501,6 @@
             </item>
             <item>
              <widget class="QLineEdit" name="form_Acc_4"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="form_MO_4"/>
             </item>
             <item>
              <widget class="QLineEdit" name="form_Setpoint_4"/>
@@ -542,9 +529,6 @@
              <widget class="QLineEdit" name="form_KIdown_5"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="form_CP_5"/>
-            </item>
-            <item>
              <widget class="QLineEdit" name="form_SP_5"/>
             </item>
             <item>
@@ -552,9 +536,6 @@
             </item>
             <item>
              <widget class="QLineEdit" name="form_Acc_5"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="form_MO_5"/>
             </item>
             <item>
              <widget class="QLineEdit" name="form_Setpoint_5"/>
@@ -571,6 +552,22 @@
          </layout>
         </item>
         <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>10</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QLabel" name="label_9">
@@ -583,7 +580,7 @@
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>10</height>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
@@ -591,8 +588,14 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignVCenter">
            <widget class="QPushButton" name="startButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="text">
              <string>START</string>
             </property>
@@ -604,15 +607,27 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignVCenter">
            <widget class="QPushButton" name="stopButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="text">
              <string>STOP</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
            <widget class="QPushButton" name="clearButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="text">
              <string>CLEAR</string>
             </property>
@@ -929,7 +944,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1251</width>
+     <width>1249</width>
      <height>21</height>
     </rect>
    </property>
