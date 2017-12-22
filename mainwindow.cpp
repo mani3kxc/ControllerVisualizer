@@ -354,7 +354,6 @@ void MainWindow::on_copydown12Button_clicked()
 {
 
     copyFromTo("1","2");
-
 }
 
 void MainWindow::on_copydown23Button_clicked()
@@ -398,23 +397,23 @@ void MainWindow::copyFromTo(QString from, QString to)
 
 }
 
-
-void MainWindow::on_updateButton_1_clicked()
+// Wysłanie danych z konkretnego rzędu do urządzenia (obługa przycisków update)
+void MainWindow::updateData(QString row)
 {
+
     QString sp, kPd, kPu, kId, kIu, acc, se, i, fb, delay, msg;
 
-    sp = "sp" + ui->form_Setpoint_1->text() + ";"; //Setpoint
-    kPd = "kPd" + ui->form_KPdown_1->text() + ";";
-    kPu = "kPu" + ui->form_KPup_1->text() + ";";
-    kId = "kId" + ui->form_KIdown_1->text() + ";";
-    kIu = "kIu" + ui->form_KIup_1->text() + ";";
-    acc = "acc" + ui->form_Acc_1->text() + ";";
+    sp = "sp" + ui->centralWidget->findChild<QLineEdit *>("form_Setpoint_" + row)->text() + ";";
+    kPd = "kPd" + ui->centralWidget->findChild<QLineEdit *>("form_KPdown_" + row)->text() + ";";
+    kPu = "kPu" + ui->centralWidget->findChild<QLineEdit *>("form_KPup_" + row)->text() + ";";
+    kId = "kId" + ui->centralWidget->findChild<QLineEdit *>("form_KIdown_" + row)->text() + ";";
+    kIu = "kIu" + ui->centralWidget->findChild<QLineEdit *>("form_KIup_" + row)->text() + ";";
+    acc = "acc" + ui->centralWidget->findChild<QLineEdit *>("form_Acc_" + row)->text() + ";";
+    se = "se" + ui->centralWidget->findChild<QLineEdit *>("form_SP_" + row)->text() + ";";
+    delay = "delay" + ui->centralWidget->findChild<QLineEdit *>("form_Delay_" + row)->text() + ";";
 
-    se = "se" + ui->form_SP_1->text() + ";"; //Błąd! //Sensor Period
 
-    delay = "delay" + ui->form_Delay_1->text() + ";";
-
-    set_y_max = ui->form_Setpoint_1->text().toInt();
+    set_y_max = ui->centralWidget->findChild<QLineEdit *>("form_Setpoint_" + row)->text().toInt();
 
     send(sp);
     send(kPd);
@@ -432,163 +431,36 @@ void MainWindow::on_updateButton_1_clicked()
     ui->commandLine->clear();
 
     resetButtonsColors();
-    ui->updateButton_1->setStyleSheet("* { background-color: rgb(120,195,120);}");
+    ui->centralWidget->findChild<QPushButton *>("updateButton_" + row)->setStyleSheet("* { background-color: rgb(120,195,120);}");
 
-    preset = 1;
+    preset = row.toInt();
 
+}
+
+// Obługa przycisków update od 1 do 5
+void MainWindow::on_updateButton_1_clicked()
+{
+    updateData("1");
 }
 
 void MainWindow::on_updateButton_2_clicked()
 {
-    QString sp, kPd, kPu, kId, kIu, acc, se, i, fb, delay, msg;
-
-    sp = "sp" + ui->form_Setpoint_2->text() + ";"; //Setpoint
-    kPd = "kPd" + ui->form_KPdown_2->text() + ";";
-    kPu = "kPu" + ui->form_KPup_2->text() + ";";
-    kId = "kId" + ui->form_KIdown_2->text() + ";";
-    kIu = "kIu" + ui->form_KIup_2->text() + ";";
-    acc = "acc" + ui->form_Acc_2->text() + ";";
-
-    se = "se" + ui->form_SP_2->text() + ";"; //Błąd! //Sensor Period
-
-    delay = "delay" + ui->form_Delay_2->text() + ";";
-
-    set_y_max = ui->form_Setpoint_2->text().toInt();
-
-    send(sp);
-    send(kPd);
-    send(kPu);
-    send(kId);
-    send(kIu);
-    send(acc);
-
-    send(se);
-
-    send(delay);
-
-    status=1;
-
-    ui->commandLine->clear();
-
-    resetButtonsColors();
-    ui->updateButton_2->setStyleSheet("* { background-color: rgb(120,195,120);}");
-
-    preset = 2;
+    updateData("2");
 }
 
 void MainWindow::on_updateButton_3_clicked()
 {
-    QString sp, kPd, kPu, kId, kIu, acc, cp, se, i, max, fb, delay, msg;
-
-    sp = "sp" + ui->form_Setpoint_3->text() + ";"; //Setpoint
-    kPd = "kPd" + ui->form_KPdown_3->text() + ";";
-    kPu = "kPu" + ui->form_KPup_3->text() + ";";
-    kId = "kId" + ui->form_KIdown_3->text() + ";";
-    kIu = "kIu" + ui->form_KIup_3->text() + ";";
-    acc = "acc" + ui->form_Acc_3->text() + ";";
-
-    se = "se" + ui->form_SP_3->text() + ";"; //Błąd! //Sensor Period
-
-    delay = "delay" + ui->form_Delay_3->text() + ";";
-
-    set_y_max = ui->form_Setpoint_3->text().toInt();
-
-    send(sp);
-    send(kPd);
-    send(kPu);
-    send(kId);
-    send(kIu);
-    send(acc);
-
-    send(se);
-
-    send(delay);
-
-    status=1;
-
-    ui->commandLine->clear();
-
-    resetButtonsColors();
-    ui->updateButton_3->setStyleSheet("* { background-color: rgb(120,195,120);}");
-
-    preset = 3;
+    updateData("3");
 }
 
 void MainWindow::on_updateButton_4_clicked()
 {
-    QString sp, kPd, kPu, kId, kIu, acc,  se, i, fb, delay, msg;
-
-    sp = "sp" + ui->form_Setpoint_4->text() + ";"; //Setpoint
-    kPd = "kPd" + ui->form_KPdown_4->text() + ";";
-    kPu = "kPu" + ui->form_KPup_4->text() + ";";
-    kId = "kId" + ui->form_KIdown_4->text() + ";";
-    kIu = "kIu" + ui->form_KIup_4->text() + ";";
-    acc = "acc" + ui->form_Acc_4->text() + ";";
-
-    se = "se" + ui->form_SP_4->text() + ";"; //Błąd! //Sensor Period
-
-    delay = "delay" + ui->form_Delay_4->text() + ";";
-
-    set_y_max = ui->form_Setpoint_4->text().toInt();
-
-    send(sp);
-    send(kPd);
-    send(kPu);
-    send(kId);
-    send(kIu);
-    send(acc);
-
-    send(se);
-
-    send(delay);
-
-    status=1;
-
-    ui->commandLine->clear();
-
-    resetButtonsColors();
-    ui->updateButton_4->setStyleSheet("* { background-color: rgb(120,195,120);}");
-
-    preset = 4;
+    updateData("4");
 }
 
 void MainWindow::on_updateButton_5_clicked()
 {
-    QString sp, kPd, kPu, kId, kIu, acc, se, i, fb, delay, msg;
-
-    sp = "sp" + ui->form_Setpoint_5->text() + ";"; //Setpoint
-    kPd = "kPd" + ui->form_KPdown_5->text() + ";";
-    kPu = "kPu" + ui->form_KPup_5->text() + ";";
-    kId = "kId" + ui->form_KIdown_5->text() + ";";
-    kIu = "kIu" + ui->form_KIup_5->text() + ";";
-    acc = "acc" + ui->form_Acc_5->text() + ";";
-
-    se = "se" + ui->form_SP_5->text() + ";"; //Błąd! //Sensor Period
-
-    delay = "delay" + ui->form_Delay_5->text() + ";";
-
-    set_y_max = ui->form_Setpoint_5->text().toInt();
-
-    send(sp);
-    send(kPd);
-    send(kPu);
-    send(kId);
-    send(kIu);
-    send(acc);
-
-    send(se);
-
-    send(delay);
-
-    status=1;
-
-    ui->commandLine->clear();
-
-    resetButtonsColors();
-    ui->updateButton_5->setStyleSheet("* { background-color: rgb(120,195,120);}");
-
-    preset = 5;
-
+    updateData("5");
 }
 
 void MainWindow::resetButtonsColors() {
@@ -598,7 +470,6 @@ void MainWindow::resetButtonsColors() {
     ui->updateButton_3->setStyleSheet("background-color: rgb(200,200,200);");
     ui->updateButton_4->setStyleSheet("background-color: rgb(200,200,200);");
     ui->updateButton_5->setStyleSheet("background-color: rgb(200,200,200);");
-
 }
 
 

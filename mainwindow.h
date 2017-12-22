@@ -78,6 +78,9 @@ private:
     /* Przekopiowanie danych formuarzy między kolumnami */
     void copyFromTo(QString from, QString to);
 
+    /* Obsługa kliknięcia jednego z przycisków UPDATE*/
+    void updateData(QString row);
+
 
     QList <QSerialPortInfo> available_port;     // lista dostępnych portów
     const QSerialPortInfo *info;                // wybrany port
